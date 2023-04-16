@@ -5,7 +5,8 @@ const knex = require('knex')({
         port: process.env.PORT_DB,
         user: process.env.USER_DB,
         password: process.env.PASSWORD_DB,
-        database: process.env.DATABASE_DB
+        database: process.env.DATABASE_DB,
+        ssl: true
     }
 });
 module.exports = knex
