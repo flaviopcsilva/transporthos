@@ -10,8 +10,10 @@ router.get('/', (req, res) => {
 
 //rotas de clientes
 router.get('/cliente', listarClientes)
+router.post('/cliente')
 
 //ROTAS FOLLOWUP
 router.get('/followup', listarFollowUps)
+router.post('/followup')
 
 module.exports = router
