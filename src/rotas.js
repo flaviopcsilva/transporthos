@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
 //rotas de clientes
 router.get('/cliente', listarClientes)
 router.post('/cliente')
+router.put('/cliente')
 
 //ROTAS FOLLOWUP
 router.get('/followup', listarFollowUps)
