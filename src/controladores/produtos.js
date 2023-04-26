@@ -1,3 +1,7 @@
-const listar_produtos = async (req, res) => {
+const listarProdutos = async (req, res) => {
 
+}
+
+module.exports = {
+    listarProdutos
 }
