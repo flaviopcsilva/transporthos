@@ -1,6 +1,8 @@
 const { Router } = require('express')
 const { listarClientes } = require('./controladores/clientes')
 const { listarFollowUps } = require('./controladores/followup')
+const { listarProdutos } = require('./controladores/produtos')
+
 
 const router = Router()
 
@@ -16,5 +18,7 @@ router.put('/cliente')
 //ROTAS FOLLOWUP
 router.get('/followup', listarFollowUps)
 router.post('/followup')
+
+router.get('/produto', listarProdutos)
 
 module.exports = router
