@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const { listarClientes } = require('./controladores/clientes')
-const { listarFollowUps } = require('./controladores/followup')
+const { listarFollowUps, listarFollowUpPorNomeCliente, cadastrarFollowUp } = require('./controladores/followup')
 
 const { listarUsuarios } = require('./controladores/usuarios')
 
@@ -20,8 +20,9 @@ router.post('/cliente')
 router.put('/cliente')
 
 //ROTAS FOLLOWUP
-router.get('/followup', listarFollowUps)
-router.post('/followup')
+router.get('/followup', listarFollowUpPorNomeCliente)
+router.post('/followup', cadastrarFollowUp)
+router.put('/followup')
 
 // rotas de produtos
 router.get('/produto', listarProdutos)
