@@ -1,5 +1,26 @@
 const knex = require("../conexao/bancodedados")
 
+const cadastrarFollowUp = async (req, res) => {
+    const { cliente_cnpj, processo, valorcif, documentos, motorista_veiculo
+        , origem, destino, container, inicio, conclusao, followup_atual } = req.body
+
+    try {
+
+        const followup = await knex('followup')
+            .insert({
+                cliente_cnpj, processo, valorcif, documentos, motorista_veiculo
+                , origem, destino, container, inicio, conclusao, followup_atual
+            })
+            .returning('*')
+
+
+        return res.status(201).json(followup)
+
+    } catch (error) {
+        return res.status(500).json({ Mensagem: `Erro interno do servidor ERROR: ${error.message}` })
+    }
+}
+
 const listarFollowUps = async (req, res) => {
     try {
 
@@ -25,9 +46,10 @@ const listarFollowUpPorNomeCliente = async (req, res) => {
         }
 
         const resultadoDaBusca = await knex('clientes')
-            .select('clientes.cnpj_mf', 'clientes.nome', 'followup.processo'
-                , 'followup.valorcif', 'followup.origen', 'followup.destino'
-                , 'followup.followup_atual')
+            .select('followup.id as ID_Followup', 'clientes.cnpj_mf', 'clientes.nome', 'followup.processo'
+                , 'followup.valorcif'
+                , 'followup.documentos', 'followup.motorista_veiculo'
+                , 'followup.origem', 'followup.destino', 'followup.container', 'followup.followup_atual')
             .join('followup', 'clientes.cnpj_mf', '=', 'followup.cliente_cnpj')
             .whereRaw('lower(nome) like ?', `%${cliente}%`)
 
@@ -45,5 +67,6 @@ const listarFollowUpPorNomeCliente = async (req, res) => {
 
 module.exports = {
     listarFollowUps,
-    listarFollowUpPorNomeCliente
+    listarFollowUpPorNomeCliente,
+    cadastrarFollowUp
 }
